@@ -1,7 +1,4 @@
-Dir[File.join(__dir__, 'modules', '*.rb')].each {|file| require file }
-
 class Wootric::Client
-  include EndUser
 
   attr_reader :auth_token
 
@@ -19,14 +16,4 @@ class Wootric::Client
     auth_token = JSON.parse(response.body)["access_token"]
     auth_token
   end
-
-  def connection
-    Faraday.new(:url => "https://api.wootric.com/v1/") do |req|
-      req.headers['Content-Type'] = 'application/json'
-      req.headers['User-Agent'] = "Wootric-Ruby v#{Wootric::VERSION}"
-      req.headers['Authorization'] = "Bearer #{self.auth_token}"
-      req.adapter Faraday.default_adapter
-    end
-  end
-
 end
