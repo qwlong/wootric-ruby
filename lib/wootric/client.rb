@@ -15,7 +15,6 @@ class Wootric::Client
       req.body = {'grant_type': 'password', 'username': email, 'password': password}
     end
     auth_token = JSON.parse(response.body)["access_token"]
-    binding.pry
     auth_token
   end
 
