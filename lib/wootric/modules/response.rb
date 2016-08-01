@@ -71,6 +71,7 @@ class Wootric::Client
     def find_response(end_user_id, response_id)
       response = connection.get("end_users/#{end_user_id}/responses/#{response_id}")
       response_json = JSON.parse(response.body)
+      binding.pry
       response_json
     end
 
