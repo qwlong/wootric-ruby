@@ -13,7 +13,7 @@ class Wootric::Client
   def auth_client_and_return_token(email, password)
     response ||= Faraday.post do |req|
       req.url "https://api.wootric.com/oauth/token"
-      req.body = {'grant_type': 'password', 'username': email, 'password': password}
+      req.body = { grant_type: 'password', username: email, password: password }
     end
     auth_token = JSON.parse(response.body)["access_token"]
     auth_token
