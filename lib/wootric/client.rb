@@ -2,6 +2,7 @@ Dir[File.join(__dir__, 'modules', '*.rb')].each {|file| require file }
 
 class Wootric::Client
   include EndUser
+  include Response
 
   attr_reader :auth_token
 
@@ -26,5 +27,4 @@ class Wootric::Client
       req.adapter Faraday.default_adapter
     end
   end
-
 end
