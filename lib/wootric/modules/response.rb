@@ -90,6 +90,5 @@ class Wootric::Client
       deleted_response_json = JSON.parse(delete_response.body)
       deleted_response_json
     end
-
   end
 end
