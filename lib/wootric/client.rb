@@ -4,6 +4,7 @@ class Wootric::Client
   include EndUser
   include Response
   include EndUserSetting
+  include Decline
 
   attr_reader :auth_token
 
