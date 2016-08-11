@@ -8,15 +8,14 @@ Add this line to your application's Gemfile:
 
 ```ruby
 gem 'wootric-ruby'
-
+```
 And then execute:
 
-    $ bundle
+		$ bundle
 
 Or install it yourself as:
 
     $ gem install wootric-ruby
-```
 
 ## Usage
 
