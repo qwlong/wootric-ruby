@@ -7,7 +7,7 @@ class Wootric::Client
     end
 
     describe "#end_user_settings" do
-      it "returns return a specific end users settings" do
+      it "returns a specific end users settings" do
         expect(@client.end_user_settings(16313044)).to be_an_instance_of(Hash)
       end
     end
