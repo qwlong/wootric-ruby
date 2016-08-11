@@ -16,6 +16,7 @@ And then execute:
 Or install it yourself as:
 
     $ gem install wootric-ruby
+```
 
 ## Usage
 
