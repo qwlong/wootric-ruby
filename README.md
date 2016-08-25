@@ -40,7 +40,7 @@ API actions are available as methods on the client object. Currently, the Wootri
 | Return a specific decline                | `#find_decline(end_user_id, decline_id)`                |
 | Delete a decline for an end user         | `#delete_decline(end_user_id, decline_id)` 						 |
 | Create a new decline for an end user 		 | `#create_decline(end_user_id, options={})`              |
-| **Response															 |                      																	 |
+| **Response**															 |                      																	 |
 | Return responses for a user              | `#responses(options={})`                					       |
 | Return responses for an end user         | `#end_user_responses(end_user_id, options={})`          |
 | Return Promoter responses for end user   | `#end_user_promoters_responses(end_user_id, options={})`|
@@ -176,7 +176,6 @@ client.declines(page: 5, per_page: 10)
   }
 ]
 ```
->>>>>>> b05c4e1820936bd7ef58753d9b58260621324cb6
 
 ## Development
 
