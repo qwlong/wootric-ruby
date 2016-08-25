@@ -50,7 +50,133 @@ API actions are available as methods on the client object. Currently, the Wootri
 | Delete a response for an end user        | `#delete_response(end_user_id, response_id)`            |
 | Create a new response for an end user    | `#delete_response(end_user_id, response_id)`            |
 
-## TODO: Usage Examples
+## Usage Examples
+
+### Authentication
+
+Authenticate the client and start exporting data from your account.
+
+```ruby
+require "wootric"
+
+client = Wootric::Client.new(<wootric_email>, <wootric_password>)
+
+client.auth_token
+#=> "<Wootric Access Token>"
+```
+
+Here are some common use cases for the Wootric v1 API client.
+
+### You can list all end users for a specific account, and get the details about each end user.
+
+```ruby
+client.end_users
+
+#=>
+[
+  {
+    "id": 1,
+    "created_at" : "2014-12-01 18:36:59",
+    "updated_at" : "2014-12-01 18:36:59",
+    "email": "nps@example.com",
+    "last_surveyed": null,
+    "external_created_at": null,
+    "user_id": 16,
+    "page_views_count" : 1,
+    "properties": {"plan": "Small Business", "product": "Example"}
+  },
+  {
+    "id": 2,
+    "created_at" : "2014-12-01 18:36:59",
+    "updated_at" : "2014-12-04 12:43:44",
+    "email": "nps2@example.com",
+    "last_surveyed": null,
+    "external_created_at": null,
+    "user_id": 16,
+    "page_views_count" : 3,
+    "properties": {"plan": "Enterprise", "product": "The Company"}
+  }
+]
+```
+
+### You can find specific end user by their user_id.
+
+```ruby
+client.find_end_user("16313044")
+
+#=>
+{
+  "id": 2,
+  "created_at" : "2014-12-01 18:36:59",
+  "updated_at" : "2014-12-04 12:43:44",
+  "email": "nps2@example.com",
+  "last_surveyed": null,
+  "external_created_at": null,
+  "user_id": 16,
+  "page_views_count" : 3,
+  "properties": {"plan": "Enterprise", "product": "The Company"}
+}
+```
+
+### You can list all responses.
+
+```ruby
+client.responses(page: 5, per_page: 10, sort_order: dsc)
+
+#=>
+[
+  {
+    "id": 1,
+    "created_at" : "2014-12-01 18:36:59",
+    "updated_at" : "2014-12-01 18:36:59",
+    "score": 10,
+    "text": "Great Service",
+    "ip_address": "192.168.0.1",
+    "origin_url" : "http://www.great-service.com",
+    "end_user_id": 1,
+    "user_id": 16
+  },
+  {
+    "id": 2,
+    "created_at" : "2014-11-01 17:38:50",
+    "updated_at" : "2014-11-01 17:38:50",
+    "score": 0,
+    "text": "Please fix those bugs",
+    "ip_address": "127.0.0.1",
+    "origin_url" : "http://www.fix-bugs.com",
+    "end_user_id": 2,
+    "user_id": 16
+  }
+]
+```
+
+### You can list all declines.
+
+```ruby
+client.declines(page: 5, per_page: 10)
+
+#=>
+
+[
+  {
+    "id": 1,
+    "end_user_id": 1,
+    "created_at":  "2014-11-01 17:38:50",
+    "updated_at":  "2014-11-01 17:38:50",
+    "user_id": 1,
+    "survey_id": 1
+  },
+  {
+    "id": 2,
+    "end_user_id": 2,
+    "created_at":  "2014-11-01 17:38:50",
+    "updated_at":  "2014-11-01 17:38:50",
+    "user_id": 1,
+    "survey_id": 2
+  }
+]
+```
+>>>>>>> b05c4e1820936bd7ef58753d9b58260621324cb6
 
 ## Development
 
