@@ -3,13 +3,9 @@ class Wootric::Client
 
     def responses(options={})
       responses = connection.get("responses") do |req|
-        req.params['page'] = options[:page] unless options[:page].nil?
-        req.params['per_page'] = options[:per_page] unless options[:per_page].nil?
-        req.params['created[gt]'] = options[:gt] unless options[:gt].nil?
-        req.params['created[lt]'] = options[:lt] unless options[:lt].nil?
-        req.params['created[gte]'] = options[:gte] unless options[:gte].nil?
-        req.params['created[lte]'] = options[:lte] unless options[:lte].nil?
-        req.params['sort_order'] = options[:sort_order] unless options[:sort_order].nil?
+        req = add_pagination_params(req, options)
+        req = add_filter_params(req, options)
+        req.params['sort_order'] = options[:sort_order] if options[:sort_order].present?
       end
 
       responses_json = JSON.parse(responses.body)
@@ -18,12 +14,8 @@ class Wootric::Client
 
     def end_user_responses(end_user_id, options={})
       end_user_responses = connection.get("end_users/#{end_user_id}/responses") do |req|
-        req.params['page'] = options[:page] unless options[:page].nil?
-        req.params['per_page'] = options[:per_page] unless options[:per_page].nil?
-        req.params['created[gt]'] = options[:gt] unless options[:gt].nil?
-        req.params['created[lt]'] = options[:lt] unless options[:lt].nil?
-        req.params['created[gte]'] = options[:gte] unless options[:gte].nil?
-        req.params['created[lte]'] = options[:lte] unless options[:lte].nil?
+        req = add_pagination_params(req, options)
+        req = add_filter_params(req, options)
       end
       end_user_response_json = JSON.parse(end_user_responses.body)
       end_user_response_json
@@ -31,12 +23,8 @@ class Wootric::Client
 
     def end_user_promoters_responses(end_user_id, options={})
       end_user_promoters_responses = connection.get("end_users/#{end_user_id}/responses/promoters") do |req|
-        req.params['page'] = options[:page] unless options[:page].nil?
-        req.params['per_page'] = options[:per_page] unless options[:per_page].nil?
-        req.params['created[gt]'] = options[:gt] unless options[:gt].nil?
-        req.params['created[lt]'] = options[:lt] unless options[:lt].nil?
-        req.params['created[gte]'] = options[:gte] unless options[:gte].nil?
-        req.params['created[lte]'] = options[:lte] unless options[:lte].nil?
+        req = add_pagination_params(req, options)
+        req = add_filter_params(req, options)
       end
       end_user_promoters_response_json = JSON.parse(end_user_promoters_responses.body)
       end_user_promoters_response_json
@@ -44,12 +32,8 @@ class Wootric::Client
 
     def end_user_passives_responses(end_user_id, options={})
       end_user_passives_responses = connection.get("end_users/#{end_user_id}/responses/passives") do |req|
-        req.params['page'] = options[:page] unless options[:page].nil?
-        req.params['per_page'] = options[:per_page] unless options[:per_page].nil?
-        req.params['created[gt]'] = options[:gt] unless options[:gt].nil?
-        req.params['created[lt]'] = options[:lt] unless options[:lt].nil?
-        req.params['created[gte]'] = options[:gte] unless options[:gte].nil?
-        req.params['created[lte]'] = options[:lte] unless options[:lte].nil?
+        req = add_pagination_params(req, options)
+        req = add_filter_params(req, options)
       end
       end_user_passives_response_json = JSON.parse(end_user_passives_responses.body)
       end_user_passives_response_json
@@ -57,12 +41,8 @@ class Wootric::Client
 
     def end_user_detractors_responses(end_user_id, options={})
       end_user_detractors_responses = connection.get("end_users/#{end_user_id}/responses/detractors") do |req|
-        req.params['page'] = options[:page] unless options[:page].nil?
-        req.params['per_page'] = options[:per_page] unless options[:per_page].nil?
-        req.params['created[gt]'] = options[:gt] unless options[:gt].nil?
-        req.params['created[lt]'] = options[:lt] unless options[:lt].nil?
-        req.params['created[gte]'] = options[:gte] unless options[:gte].nil?
-        req.params['created[lte]'] = options[:lte] unless options[:lte].nil?
+        req = add_pagination_params(req, options)
+        req = add_filter_params(req, options)
       end
       end_user_detractors_response_json = JSON.parse(end_user_detractors_responses.body)
       end_user_detractors_response_json
@@ -71,7 +51,6 @@ class Wootric::Client
     def find_response(end_user_id, response_id)
       response = connection.get("end_users/#{end_user_id}/responses/#{response_id}")
       response_json = JSON.parse(response.body)
-      binding.pry
       response_json
     end
 
@@ -90,6 +69,20 @@ class Wootric::Client
       delete_response = connection.delete("end_users/#{end_user_id}/responses/#{response_id}")
       deleted_response_json = JSON.parse(delete_response.body)
       deleted_response_json
+    end
+  
+  private
+    
+    def add_pagination_params(req, options)
+      req.params['page'] = options[:page] if options[:page].present?
+      req.params['per_page'] = options[:per_page] if options[:per_page].present?
+    end
+    
+    def add_filter_params(req, options)
+      req.params['created[gt]'] = options[:gt] if options[:gt].present?
+      req.params['created[lt]'] = options[:lt] if options[:lt].present?
+      req.params['created[gte]'] = options[:gte] if options[:gte].present?
+      req.params['created[lte]'] = options[:lte] if options[:lte].present?
     end
   end
 end
