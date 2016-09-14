@@ -48,7 +48,7 @@ API actions are available as methods on the client object. Currently, the Wootri
 | Return Detractor responses for end user  | `#end_user_detractors_responses(end_user_id, options={})`|
 | Return a specific response 							 | `#find_response(end_user_id, response_id)`              |
 | Delete a response for an end user        | `#delete_response(end_user_id, response_id)`            |
-| Create a new response for an end user    | `#delete_response(end_user_id, response_id)`            |
+| Create a new response for an end user    | `#create_response(end_user_id, response_id)`            |
 
 ## Usage Examples
 
