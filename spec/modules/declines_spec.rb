@@ -40,4 +40,3 @@ class Wootric::Client
 
   end
 end
-
