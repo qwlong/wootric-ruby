@@ -35,19 +35,19 @@ class Wootric::Client
       delete_decline = connection.delete("end_users/#{end_user_id}/declines/#{decline_id}")
       JSON.parse(delete_decline.body)
     end
-  
+
   private
-  
+
     def add_pagination_params(req, options)
-      req.params['page'] = options[:page] if options[:page].present?
-      req.params['per_page'] = options[:per_page] if options[:per_page].present?
+      req.params['page'] = options[:page] if options[:page]
+      req.params['per_page'] = options[:per_page] if options[:per_page]
     end
 
     def add_filter_params(req, options)
-      req.params['created[gt]'] = options[:gt] if options[:gt].present?
-      req.params['created[lt]'] = options[:lt] if options[:lt].present?
-      req.params['created[gte]'] = options[:gte] if options[:gte].present?
-      req.params['created[lte]'] = options[:lte] if options[:lte].present?
+      req.params['created[gt]'] = options[:gt] if options[:gt]
+      req.params['created[lt]'] = options[:lt] if options[:lt]
+      req.params['created[gte]'] = options[:gte] if options[:gte]
+      req.params['created[lte]'] = options[:lte] if options[:lte]
     end
   end
 end
