@@ -3,7 +3,7 @@ require 'spec_helper'
 class Wootric::Client
   describe Decline do
     before(:all) do
-      @client = Wootric::Client.new(ENV['APP_EMAIL'], ENV['APP_PASSWORD'])
+      @client = Wootric::Client.new(ENV['CLIENT_ID'], ENV['CLIENT_SECRET'])
       @client.create_decline(16313044)
       @decline = @client.declines[0]["id"]
     end
