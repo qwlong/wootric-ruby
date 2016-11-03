@@ -54,12 +54,12 @@ API actions are available as methods on the client object. Currently, the Wootri
 
 ### Authentication
 
-Authenticate the client and start exporting data from your account.
+Authenticate the client and start exporting data from your account. Get your account `client_id` and `client_secret` from your [Wootric API settings page](https://app.wootric.com/account_settings/edit#!/api).
 
 ```ruby
 require "wootric"
 
-client = Wootric::Client.new(<wootric_email>, <wootric_password>)
+client = Wootric::Client.new(<client_id>, <client_secret>)
 
 client.auth_token
 #=> "<Wootric Access Token>"
