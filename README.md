@@ -1,3 +1,5 @@
+> Originally forked from: https://github.com/hookengine/wootric-ruby
+
 # Wootric Ruby API Client
 
 A Ruby toolkit for [Wootric](https://www.wootric.com/) API.
