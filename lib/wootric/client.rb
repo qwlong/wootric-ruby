@@ -18,6 +18,7 @@ class Wootric::Client
       req.body = { grant_type: 'client_credentials', client_id: client_id, client_secret: client_secret }
     end
     auth_token = JSON.parse(response.body)["access_token"]
+    auth_token
   end
 
   def connection
