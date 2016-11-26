@@ -18,15 +18,14 @@ class Wootric::Client
       req.body = { grant_type: 'client_credentials', client_id: client_id, client_secret: client_secret }
     end
     auth_token = JSON.parse(response.body)["access_token"]
-    auth_token
   end
 
   def connection
     Faraday.new(:url => "https://api.wootric.com/v1/") do |req|
+      req.adapter :net_http
       req.headers['Content-Type'] = 'application/json'
       req.headers['User-Agent'] = "Wootric-Ruby v#{Wootric::VERSION}"
       req.headers['Authorization'] = "Bearer #{self.auth_token}"
-      req.adapter Faraday.default_adapter
     end
   end
 end
