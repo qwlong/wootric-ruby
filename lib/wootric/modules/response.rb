@@ -5,7 +5,7 @@ class Wootric::Client
       responses = connection.get("responses") do |req|
         req = add_pagination_params(req, options)
         req = add_filter_params(req, options)
-        req.params['sort_order'] = options[:sort_order] if options[:sort_order].present?
+        req.params['sort_order'] = options[:sort_order] if options[:sort_order]
       end
 
       responses_json = JSON.parse(responses.body)
@@ -70,19 +70,19 @@ class Wootric::Client
       deleted_response_json = JSON.parse(delete_response.body)
       deleted_response_json
     end
-  
+
   private
-    
+
     def add_pagination_params(req, options)
-      req.params['page'] = options[:page] if options[:page].present?
-      req.params['per_page'] = options[:per_page] if options[:per_page].present?
+      req.params['page'] = options[:page] if options[:page]
+      req.params['per_page'] = options[:per_page] if options[:per_page]
     end
-    
+
     def add_filter_params(req, options)
-      req.params['created[gt]'] = options[:gt] if options[:gt].present?
-      req.params['created[lt]'] = options[:lt] if options[:lt].present?
-      req.params['created[gte]'] = options[:gte] if options[:gte].present?
-      req.params['created[lte]'] = options[:lte] if options[:lte].present?
+      req.params['created[gt]'] = options[:gt] if options[:gt]
+      req.params['created[lt]'] = options[:lt] if options[:lt]
+      req.params['created[gte]'] = options[:gte] if options[:gte]
+      req.params['created[lte]'] = options[:lte] if options[:lte]
     end
   end
 end
