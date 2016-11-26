@@ -6,7 +6,6 @@ class Wootric::Client
         add_filter_params(req, options)
         add_pagination_params(req, options)
       end
-
       JSON.parse(declines.body)
     end
 

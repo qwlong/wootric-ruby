@@ -3,7 +3,7 @@ require 'spec_helper'
 module Wootric
   describe Client do
     before(:each) do 
-      @client = Wootric::Client.new(ENV['APP_EMAIL'], ENV['APP_PASSWORD'])
+      @client = Wootric::Client.new(ENV['CLIENT_ID'], ENV['CLIENT_SECRET'])
     end
     describe  "#auth_client_and_return_auth_token" do
       it "returns the users auth_token" do
