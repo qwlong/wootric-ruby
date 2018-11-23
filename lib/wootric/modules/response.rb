@@ -5,7 +5,6 @@ class Wootric::Client
       responses = connection.get("responses") do |req|
         req = add_pagination_params(req, options)
         req = add_filter_params(req, options)
-        req.params['sort_order'] = options[:sort_order] if options[:sort_order]
       end
 
       responses_json = JSON.parse(responses.body)
