@@ -1,8 +1,12 @@
 class Wootric::Client
   module EndUser
 
-    def end_users
-      users = connection.get("end_users")
+    def end_users(options={})
+      users = connection.get("end_users") do |req|
+        req = add_pagination_params(req, options)
+        req = add_filter_params(req, options)
+      end
+
       users_json = JSON.parse(users.body)
       users_json
     end
@@ -40,6 +44,20 @@ class Wootric::Client
       user = connection.delete("end_users/#{user_id}")
       user_json = JSON.parse(user.body)
       user_json
+    end
+
+    private
+
+    def add_pagination_params(req, options)
+      req.params['page'] = options[:page] if options[:page]
+      req.params['per_page'] = options[:per_page] if options[:per_page]
+    end
+
+    def add_filter_params(req, options)
+      req.params['created[gt]'] = options[:gt] if options[:gt]
+      req.params['created[lt]'] = options[:lt] if options[:lt]
+      req.params['created[gte]'] = options[:gte] if options[:gte]
+      req.params['created[lte]'] = options[:lte] if options[:lte]
     end
 
   end
